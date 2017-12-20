@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Address Book</title>
+ 
+    <!-- Bootstrap CSS file  -->
+    <link href="webjars/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+    
+</head>
+<body>
+
+<!-- Content Section -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Address Book</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pull-right">
+                <button class="btn btn-success" data-toggle="modal" data-target="#add_new_contact_modal">Add New Contact</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+        	<div class="pull-right">
+            	<button class="btn btn-primary" data-toggle="modal" data-target="#search_contact_modal">Advanced search</button>
+            </div>
+            <input type="text" id="phrase" placeholder="Search" class="form-control"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="contacts_content"></div>
+        </div>
+    </div>
+</div>
+<!-- /Content Section -->
+ 
+ 
+<!-- Bootstrap Modals -->
+<!-- Modal - Add New Contact -->
+<div class="modal fade" id="add_new_contact_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add New Contact</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" id="firstname" placeholder="First Name" class="form-control" min="2"/>
+                </div>
+ 
+                <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" id="lastname" placeholder="Last Name" class="form-control" min="2"/>
+                </div>
+ 
+ 				<div class="form-group">
+                    <label for="homeAddress">Home Address</label>
+                    <input type="text" id="homeAddress" placeholder="Home Address" class="form-control"/>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phoneNumber">Phone</label>
+                    <input type="text" id="phoneNumber" placeholder="Phone" class="form-control"/>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Email Address" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="note">Note</label>
+                    <input type="text" id="note" placeholder="Note" class="form-control"/>
+                </div>
+ 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="if (validateForm('') !== false) { addContact(); }">Add Contact</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- // Modal -->
+ 
+<!-- Modal - Update Contact details -->
+<div class="modal fade" id="update_contact_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Update</h4>
+            </div>
+            <div class="modal-body">
+ 
+                <div class="form-group">
+                    <label for="update_firstname">First Name</label>
+                    <input type="text" id="update_firstname" placeholder="First Name" class="form-control" readonly/>
+                </div>
+ 
+                <div class="form-group">
+                    <label for="update_lastname">Last Name</label>
+                    <input type="text" id="update_lastname" placeholder="Last Name" class="form-control" readonly/>
+                </div>
+ 
+ 				<div class="form-group">
+                    <label for="update_homeAddress">Home Address</label>
+                    <input type="text" id="update_homeAddress" placeholder="Home Address" class="form-control"/>
+                </div>
+                
+                <div class="form-group">
+                    <label for="update_phoneNumber">Phone</label>
+                    <input type="text" id="update_phoneNumber" placeholder="Phone" class="form-control"/>
+                </div>
+                
+                <div class="form-group">
+                    <label for="update_email">Email Address</label>
+                    <input type="email" id="update_email" placeholder="Email Address" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="update_note">Note</label>
+                    <input type="text" id="update_note" placeholder="Note" class="form-control"/>
+                </div>
+ 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="if (validateAddressFields('update_') !== false) {updateContactDetails()}" >Save Changes</button>
+                <input type="hidden" id="hidden_contact_id">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- // Modal -->
+ 
+ <!-- Modal - Search Contact details -->
+<div class="modal fade" id="search_contact_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+ 
+                <div class="form-group">
+                    <label for="search_firstname">First Name</label>
+                    <input type="text" id="search_firstname" placeholder="First Name" class="form-control"/>
+                </div>
+ 
+                <div class="form-group">
+                    <label for="search_lastname">Last Name</label>
+                    <input type="text" id="search_lastname" placeholder="Last Name" class="form-control"/>
+                </div>
+ 
+ 				<div class="form-group">
+                    <label for="search_homeAddress">Home Address</label>
+                    <input type="text" id="search_homeAddress" placeholder="Home Address" class="form-control"/>
+                </div>
+                
+                <div class="form-group">
+                    <label for="search_phoneNumber">Phone</label>
+                    <input type="text" id="search_phoneNumber" placeholder="Phone" class="form-control"/>
+                </div>
+                
+                <div class="form-group">
+                    <label for="search_email">Email Address</label>
+                    <input type="text" id="search_email" placeholder="Email Address" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="search_note">Note</label>
+                    <input type="text" id="search_note" placeholder="Note" class="form-control"/>
+                </div>
+ 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="advancedSearch()" >Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- // Modal -->
+
+<!-- Jquery JS file -->
+<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+	    
+<!-- Bootstrap JS file -->
+<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Custom JS file -->
+<script type="text/javascript" src="js/script.js"></script>
+
+</body>
+</html>
