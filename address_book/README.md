@@ -20,7 +20,7 @@ email
   
 ### Architecture
 - Web: HTML, JQuery
-- Business Logic: Spring Boot
+- Business Logic/API: Spring
 - Data  Access: Hibernate
 - Database: H2
 
