@@ -27,6 +27,11 @@ email
 ### Build 
 Maven
 
+### Build 
+ - path to jar: release/
+ - java -jar addressbook-0.0.1-SNAPSHOT
+ - url: localhost:8080
+
 ### To improve 
 - single add/update/search form
 - use jquery-validation
