@@ -25,11 +25,10 @@ email
 - Database: H2
 
 ### Build 
-Java8
-Maven
+- Java8
+- Maven
 
-### Build 
- - path to jar in this repository: release/
+### Run 
  - java -jar addressbook-0.0.1-SNAPSHOT
  - url: localhost:8080
 
