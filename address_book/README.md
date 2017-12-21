@@ -27,3 +27,8 @@ email
 ### Build 
 Maven
 
+### To improve 
+- single add/update/search form
+- use jquery-validation
+- add second level cache
+- add security
